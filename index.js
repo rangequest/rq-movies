@@ -27,6 +27,27 @@ app.post('/api/movies', (req, res) => {
     return res.send(movie)
 })
 
+app.put('/api/movies/:id', (req, res) => {
+    const movie = movies.find(movie => movie.id === parseInt(req.params.id))
+    if(!movie) return res.status(400).send('The requested movie to PUT not found')
+
+    const {error} = validateMovie(req.body)
+    if(error) return res.status(400).send(error.details)
+
+    movie.title = req.body.title
+    return res.send(movie)
+})
+
+app.delete('/api/movies/:id', (req, res) => {
+    const movie = movies.find(movie => movie.id === parseInt(req.params.id))
+    if(!movie) return res.status(400).send('The requested movie to DELETE not found')
+
+    let index = movies.indexOf(movie)
+    movies.splice(index,1)
+
+    return res.send(movie)
+})
+
 const validateMovie = movie => {
     const schema = Joi.object({
         title: Joi.string().min(3).required()
