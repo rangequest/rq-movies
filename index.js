@@ -2,6 +2,12 @@ const express = require("express");
 const app = express();
 const movies = require("./routes/movies");
 const genres = require("./routes/genres");
+const mongoose = require("mongoose");
+
+mongoose
+  .connect("mongodb://localhost/rq-movies")
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((err) => console.error("Could not connect to MongoDB"));
 
 app.use(express.json());
 
