@@ -22,6 +22,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "joi": "^17.4.2",
+    "joi-objectid": "^3.0.1",
     "mongoose": "^6.0.5"
   }
 }
