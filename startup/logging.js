@@ -1,6 +1,6 @@
-require("express-async-errors");
+require('express-async-errors')
 module.exports = function () {
-  process.on("unhandledRejection", (ex) => {
-    throw ex;
-  });
-};
+  process.on('unhandledRejection', ex => {
+    throw ex
+  })
+}

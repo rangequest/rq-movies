@@ -31,5 +31,8 @@
     "mongoose": "^6.0.5",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.7"
+  },
+  "devDependencies": {
+    "prettier": "2.4.0"
   }
 }

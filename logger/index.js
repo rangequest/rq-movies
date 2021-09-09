@@ -1,4 +1,4 @@
-const prodLogger = require("./prodLogger");
-const devLogger = require("./devLogger");
+const prodLogger = require('./prodLogger')
+const devLogger = require('./devLogger')
 
-module.exports = devLogger;
+module.exports = devLogger
