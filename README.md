@@ -1,13 +1,9 @@
 # RQ Movies
 
-Node | *Express* | Joi
+Node | _Express_ | Mongo | bcrypt | Mongoose | Winston | JWT
 
 _REST API implementing CRUD_
 
-GET
-POST
-PUT
-DELETE Movies!
-
-
-
+- Data persistance
+- Authentication
+- Authorization
