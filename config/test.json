@@ -1,4 +1,5 @@
 {
   "jwtPrivateKey": "",
+  "label": "test",
   "db": "mongodb://127.0.0.1:27017/rq-movies-test"
 }

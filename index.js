@@ -13,4 +13,5 @@ require('./startup/validation')()
 //const p = Promise.reject(new Error("Unhandled Promise Rejection"));
 
 const port = process.env.PORT || 3000
-app.listen(port, () => logger.log({ level: 'debug', message: `Server is listening on port ${port}...` }))
+const server = app.listen(port, () => logger.log({ level: 'debug', message: `Server is listening on port ${port}...` }))
+module.exports = server
