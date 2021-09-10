@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
 const logger = require('../logger')
+const config = require('config')
 
 module.exports = function () {
-  mongoose.connect('mongodb://127.0.0.1:27017/rq-movies').then(() => {
-    logger.log({
-      level: 'info',
-      message: 'Connected to MongoDB...',
-    })
+  const db = config.get('db')
+  mongoose.connect(db).then(() => {
+    logger.log({ level: 'info', message: `Connected to ${db}...` })
   })
 }
