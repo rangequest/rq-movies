@@ -100,4 +100,100 @@ describe('/api/genres', () => {
       expect(res.body).toHaveProperty('name', 'genre1')
     })
   })
+
+  describe('PUT /:id', () => {
+    let token
+    let name
+    let id
+
+    const exec = async () => {
+      return await request(server)
+        .put('/api/genres/' + id)
+        .set('x-auth-token', token)
+        .send({ name })
+    }
+
+    beforeEach(() => {
+      token = new User().generateAuthToken()
+      name = 'genre1'
+      id = mongoose.Types.ObjectId()
+    })
+
+    it('should return 401 if the client is not logged in', async () => {
+      token = ''
+      const res = await exec()
+      expect(res.status).toBe(401)
+    })
+
+    it('should return 400 if the the genre is less than 5 charactors', async () => {
+      name = 'a'
+      const res = await exec()
+      expect(res.status).toBe(400)
+    })
+
+    it('should return 400 if the the genre is more than 50 charactors', async () => {
+      name = new Array(52).join('a')
+      const res = await exec()
+      expect(res.status).toBe(400)
+    })
+
+    it('should return 400 if the the genre name is not present', async () => {
+      name = null
+      const res = await exec()
+      expect(res.status).toBe(400)
+    })
+
+    it('should return 404 if the genre not found', async () => {
+      const res = await exec()
+      expect(res.status).toBe(404)
+    })
+
+    it('should update the genre', async () => {
+      const genre = new Genre({ _id: id, name: 'Thriller' })
+      genre.save()
+
+      id = genre.id
+      name = 'SciFi'
+
+      await exec()
+
+      const updated = await Genre.findById(id)
+
+      expect(updated.name).toBe('SciFi')
+    })
+
+    it('should return 200 after updating the genre', async () => {
+      const genre = new Genre({ _id: id, name: 'Thriller' })
+      genre.save()
+
+      id = genre.id
+      const res = await exec()
+
+      expect(res.status).toBe(200)
+    })
+  })
+
+  describe('DELETE /:id', () => {
+    it('should delete genre when called with id', async () => {
+      token = new User({ isAdmin: true }).generateAuthToken()
+      const genre = new Genre({ name: 'genre1' })
+      await genre.save()
+
+      const res = await request(server)
+        .delete('/api/genres/' + genre._id)
+        .set('x-auth-token', token)
+
+      expect(res.status).toBe(200)
+    })
+
+    it('should return 404 if genre to be deleted not found', async () => {
+      token = new User({ isAdmin: true }).generateAuthToken()
+      id = new mongoose.Types.ObjectId()
+      const res = await request(server)
+        .delete('/api/genres/' + id)
+        .set('x-auth-token', token)
+
+      expect(res.status).toBe(404)
+    })
+  })
 })
