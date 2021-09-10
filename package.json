@@ -4,7 +4,7 @@
   "description": "RQ Movies Application",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose --detectOpenHandles",
+    "test": "jest --watchAll --verbose --detectOpenHandles --coverage",
     "start": "node index.js",
     "dev": "set NODE_ENV=development&& node index.js",
     "test-dev": "set NODE_ENV=test&& node index.js"
