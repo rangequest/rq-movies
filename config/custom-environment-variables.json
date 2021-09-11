@@ -1,3 +1,4 @@
 {
-  "jwtPrivateKey": "rqMoviesJwtPrivateKey"
+  "jwtPrivateKey": "rqMoviesJwtPrivateKey",
+  "db": "rqMoviesDb"
 }
