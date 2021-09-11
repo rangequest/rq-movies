@@ -1,6 +1,7 @@
 const { createLogger, format, transports } = require('winston')
 const { combine, printf, colorize } = format
 require('winston-mongodb')
+const config = require('config')
 
 const logFormat = printf(({ level, message, label, timestamp, stack }) => {
   return `${timestamp} [${label}] ${level}: ${message} ${stack}`
@@ -23,10 +24,16 @@ const levels = {
 const prodLogger = createLogger({
   level: 'info',
   format: combine(
-    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-    format.label({ label: 'rq-movies' }),
+    format.timestamp(),
+    format.label({ label: config.get('label') }),
+    format.splat(),
     format.errors({ stack: true }),
-    logFormat
+    printf(({ level, message, label, timestamp, stack }) => {
+      if (stack) {
+        return `${timestamp} [${label}] ${level}: ${message}\n${stack}`
+      }
+      return `${timestamp} [${label}] ${level}: ${message}`
+    })
     //format.json()
   ),
   transports: [
