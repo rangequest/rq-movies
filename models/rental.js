@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const mongoose = require('mongoose')
+Joi.objectId = require('joi-objectid')(Joi)
 
 const Rental = mongoose.model(
   'Rental',
