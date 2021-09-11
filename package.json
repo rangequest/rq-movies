@@ -7,7 +7,7 @@
     "test": "jest --watchAll --verbose --detectOpenHandles",
     "test-coverage": "jest --watchAll --verbose --detectOpenHandles --coverage",
     "start": "node index.js",
-    "development": "set NODE_ENV=development&& node index.js",
+    "development": "set NODE_ENV=development&& nodemon index.js",
     "production": "set NODE_ENV=production&& node index.js",
     "test-dev": "set NODE_ENV=test&& node index.js"
   },

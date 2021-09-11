@@ -12,6 +12,12 @@ require('./startup/validation')()
 //throw new Error("Uncaught exception");
 //const p = Promise.reject(new Error("Unhandled Promise Rejection"));
 
+// For testing logger
+// const error = new Error('Ooops')
+// logger.error('An error occurred:', error)
+
 const port = process.env.PORT || 3000
-const server = app.listen(port, () => logger.log({ level: 'debug', message: `Server is listening on port ${port}...` }))
+const server = app.listen(port, () =>
+  logger.log({ level: 'debug', message: `Server is listening on port ${port}...` })
+)
 module.exports = server
