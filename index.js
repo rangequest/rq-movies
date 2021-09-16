@@ -3,6 +3,7 @@ const app = express()
 const config = require('config')
 const logger = require('./logger')
 
+require('./startup/cors')(app)
 require('./startup/logging')()
 require('./startup/routes')(app)
 require('./startup/db')()
