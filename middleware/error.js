@@ -2,5 +2,5 @@ const logger = require('../logger')
 
 module.exports = function (err, req, res, next) {
   logger.error(err)
-  res.status(500).send('Somethings failed')
+  res.status(500).send('An Unexpected Error Occured in the Server!')
 }
