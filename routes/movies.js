@@ -3,13 +3,14 @@ const { Genre } = require('../models/genre')
 const mongoose = require('mongoose')
 const express = require('express')
 const router = express.Router()
+const auth = require('../middleware/auth')
 
 router.get('/', async (req, res) => {
   const movies = await Movie.find().sort('name')
   res.send(movies)
 })
 
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
   const { error } = validate(req.body)
   if (error) return res.status(400).send(error.details[0].message)
 
