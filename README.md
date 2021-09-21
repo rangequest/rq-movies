@@ -30,3 +30,17 @@ heroku open
 ```
 heroku config:set rqMoviesDb=mongodb://<username>:<password>...
 ```
+
+# Google Compute Engine Deployment
+
+```
+// Backend
+git clone https://github.com/rangequest/rq-movies.git
+
+// Frontend
+git clone https://github.com/rangequest/rq-react-movies.git
+
+// Docker Compose Up!
+cd rq-movies
+docker-compose up
+```
