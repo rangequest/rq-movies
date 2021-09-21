@@ -40,7 +40,7 @@ const devLogger = createLogger({
       level: 'error',
       collection: 'logs',
       options: { useUnifiedTopology: true },
-      db: 'mongodb://127.0.0.1:27017/rq-movies',
+      db: config.get('db'),
     }),
   ],
   exceptionHandlers: [
@@ -49,7 +49,7 @@ const devLogger = createLogger({
     new transports.MongoDB({
       collection: 'logs',
       options: { useUnifiedTopology: true },
-      db: 'mongodb://127.0.0.1:27017/rq-movies',
+      db: config.get('db'),
     }),
   ],
 })
